@@ -75,4 +75,5 @@ public class DJModel {
     public ArrayList<EventModel> getEvents() {
         return events;
     }
+
 }
