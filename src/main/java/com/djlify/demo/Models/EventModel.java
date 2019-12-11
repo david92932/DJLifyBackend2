@@ -44,7 +44,7 @@ public class EventModel {
 
     public void upvoteSong(SongModel song)
     {
-        //TODO: complete upvoteSong
+        song.upvoteSong();
     }
 
     public void setEventID(String eventID) {

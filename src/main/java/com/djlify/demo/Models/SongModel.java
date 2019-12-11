@@ -5,6 +5,7 @@ import java.util.Date;
 public class SongModel {
 
     String name, ID, APIURL, artist;
+    int upvotes;
     Date duration;
 
     SongModel()
@@ -14,6 +15,7 @@ public class SongModel {
         this.ID = null;
         this.APIURL = null;
         this.duration = null;
+        this.upvotes = 0;
     }
 
     SongModel(String name, String artist, String ID, String APIURL, Date duration)
@@ -23,6 +25,7 @@ public class SongModel {
         this.ID = ID;
         this.APIURL = APIURL;
         this.duration = duration;
+        this.upvotes = 0;
     }
 
     public void setName(String name) {
@@ -63,5 +66,9 @@ public class SongModel {
 
     public Date getDuration() {
         return duration;
+    }
+
+    public void upvoteSong() {
+        this.upvotes++;
     }
 }
