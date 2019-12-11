@@ -63,13 +63,13 @@ public class EventController {
     @GetMapping(path = "Event/addSong")
     public void addSong(@RequestParam("eventID") String eventID, @RequestParam("songID") String songID) {
 
-        SongModel song = this.spotifyClient.findSongByID(songID);
+        /*SongModel song = this.spotifyClient.findSongByID(songID);
 
         for(EventModel event: allEvents) {
             if (event.getEventID().equals(eventID)) {
                 event.addSong(song);
             }
-        }
+        }*/
     }
 
     @GetMapping(path = "Event/removeSong")

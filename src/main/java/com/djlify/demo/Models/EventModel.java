@@ -1,5 +1,7 @@
 package com.djlify.demo.Models;
 
+import com.djlify.demo.Controllers.SpotifyClient;
+
 import java.util.ArrayList;
 
 public class EventModel {
