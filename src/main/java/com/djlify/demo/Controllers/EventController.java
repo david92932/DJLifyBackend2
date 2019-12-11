@@ -1,7 +1,11 @@
 package com.djlify.demo.Controllers;
 
+import com.djlify.demo.Models.DJModel;
+import com.djlify.demo.Models.EventModel;
+import com.djlify.demo.Models.SongModel;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 @RestController
@@ -9,113 +13,98 @@ import java.util.ArrayList;
 
 public class EventController {
 
-    @GetMapping(path = "Event/getEvent")
-    public ArrayList<EventModel> viewAssignments(@RequestParam("ID") int ID)
-    {
-        ArrayList<AssignmentModel> assignments = new ArrayList<>();
-        TokenController.checkToken(token);
+    public static ArrayList<EventModel> allEvents = new ArrayList<EventModel>();
+    private SpotifyClient spotifyClient = new SpotifyClient();
 
-        tempStudent = StudentController.getStudent(studentID);
-        for (int i = 0; i < tempStudent.getAssignments().size(); i++){
-            if (!tempStudent.getAssignments().get(i).isSubmitted()){
-                assignments.add(tempStudent.getAssignments().get(i));
+    @GetMapping(path = "Event/getEvent")
+    public EventModel getEvent(@RequestParam("ID") String ID) {
+
+        for (EventModel event : allEvents) {
+            if (event.getEventID().equals(ID)) {
+                return event;
             }
         }
-        return assignments;
 
-    }
-
-    @RequestMapping(path = "Assignment/newAssignment")
-    public boolean createAssignment(@RequestParam("Token") int token, @RequestBody AssignmentModel assignment, @RequestParam("StudentID") int studentID)
-    {
-
-
-        TokenController.checkToken(token);
-        tempStudent = StudentController.getStudent(studentID);
-
-        int id = assignment.assignmentID;
-
-
-        ArrayList <AssignmentModel> assignments = new ArrayList<>();
-        assignments = tempStudent.getAssignments();
-
-        for(int i = 0; i < assignments.size(); i++)
-        {
-
-            if (assignments.get(i).assignmentID == id)
-                return false;
-        }
-
-
-        String name = assignment.name;
-
-        String description = assignment.description;
-
-        int priority = assignment.assignmentPriority;
-        String dueDate = assignment.dueDate;
-
-        boolean isSubmitted = false;
-
-
-        tempAssignment = new AssignmentModel(name, id, description, priority, dueDate, isSubmitted);
-
-
-        tempStudent = StudentController.getStudent(studentID);
-        tempStudent.addAssignment(tempAssignment);
-
-        return true;
-
-    }
-
-    @DeleteMapping(path = "Assignment/submit")
-    public void submitAssignment(@RequestParam("Token") int token, @RequestParam("AssignmentID") int assignmentID, @RequestParam("StudentID") int studentID)
-    {
-
-        TokenController.checkToken(token);
-
-        tempStudent = StudentController.getStudent(studentID);
-
-        if (tempStudent.getAssignments() == null)
-            throw new RuntimeException("Empty Assignment List");
-
-        tempStudent.completeAssignment(assignmentID);
+        return null;
 
     }
 
     /**
-     * Update an assignment
-     * @param assignmentID
-     * @param studentID
-     * @param assignmentUpdate
+     * Returns all events associated with a DJ
+     *
+     * @param DJID: string DJ ID
+     * @return EventModel ArrayList with all DJ events
      */
-    @PutMapping(path = "Assignment/update")
-    public boolean updateAssignment(@RequestParam("Token") int token, @RequestParam("AssignmentID") int assignmentID, @RequestParam("StudentID") int studentID,
-                                    @RequestBody AssignmentModel assignmentUpdate)
-    {
+    @GetMapping(path = "Event/getDJEvents")
+    public ArrayList<EventModel> getDJEvent(@RequestParam("ID") String DJID) {
 
-        TokenController.checkToken(token);
+        ArrayList<EventModel> DJEvents = new ArrayList<>();
 
-        tempStudent = StudentController.getStudent(studentID);
-        boolean updatedAssignment = tempStudent.updateAssignment(assignmentID, assignmentUpdate);
+        for (EventModel event : allEvents) {
 
-        if(updatedAssignment == true)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
+            DJModel tempDJ = event.getHostingDJ();
+            String tempDJID = tempDJ.getID();
+
+            if (tempDJID.equals(DJID)) {
+                DJEvents.add(event);
+            }
+
         }
 
+        return DJEvents;
+
+    }
+
+    @RequestMapping(path = "Event/AddEvent")
+    public void addEvent(@RequestBody EventModel event) {
+        allEvents.add(event);
+    }
+
+    @GetMapping(path = "Event/addSong")
+    public void addSong(@RequestParam("eventID") String eventID, @RequestParam("songID") String songID) {
+
+        SongModel song = this.spotifyClient.findSongByID(songID);
+
+        for(EventModel event: allEvents) {
+            if (event.getEventID().equals(eventID)) {
+                event.addSong(song);
+            }
+        }
+    }
+
+    @GetMapping(path = "Event/removeSong")
+    public void removeSong(@RequestParam("eventID") String eventID, @RequestParam("songID") String songID) {
+
+        for(EventModel event: allEvents) {
+            if (event.getEventID().equals(eventID)) {
+                ArrayList<SongModel> eventSongs = new ArrayList<>();
+                eventSongs = event.getSongList();
+                for (SongModel song: eventSongs) {
+                    if (song.getID().equals(songID)) {
+                        event.removeSong(song);
+                    }
+                }
+            }
+        }
+    }
+
+    @GetMapping(path = "Event/upvoteSong")
+    public void upvoteSong(@RequestParam("eventID") String eventID, @RequestParam("songID") String songID) {
+
+        for(EventModel event: allEvents) {
+            if (event.getEventID().equals(eventID)) {
+                ArrayList<SongModel> eventSongs = new ArrayList<>();
+                eventSongs = event.getSongList();
+                for (SongModel song: eventSongs) {
+                    if (song.getID().equals(songID)) {
+                        event.upvoteSong(song);
+                    }
+                }
+            }
+        }
+    }
 }
 
-
-
-/**
- * @author David Ewing
- *
- * This is the controller for the AssignmentModel Class
- */
 
 
 
