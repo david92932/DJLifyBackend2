@@ -59,12 +59,14 @@ public class SpotifyClient {
 
              System.out.println("\n\n\n");
 
-             for (int i = 0; i < 10 && i < items.length; i++)
+             for (int i = 0; i < 25 && i < items.length; i++)
              {
                  artists = items[i].getArtists();
                  System.out.println("\n\n\nName: " + items[i].getName() + "\nArtist: " + artists[0].getName() + "\nID: " + items[i].getId() + "\nURI: " + items[i].getUri() + "\nDuration: " + items[i].getDurationMs() + "\nExplicit: " + items[i].getIsExplicit());
 
-                 SongModel temp = new SongModel(items[i].getName(), artists[0].getName(), items[i].getId(), items[i].getUri(), items[i].getDurationMs(), items[i].getIsExplicit());
+                 System.out.println("\n" + items[i].getPreviewUrl());
+
+                 SongModel temp = new SongModel(items[i].getName(), artists[0].getName(), items[i].getId(),items[i].getPreviewUrl(), items[i].getUri(), items[i].getDurationMs(), items[i].getIsExplicit());
                  searchResults.add(temp);
              }
 
@@ -85,7 +87,9 @@ public class SpotifyClient {
 
         ArrayList<SongModel> theList = new ArrayList<>();
 
-        theList = searchSong("my dick");
+        theList = searchSong("john mayer");
+
+        System.out.println(theList);
 
     }
 
