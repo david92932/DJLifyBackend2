@@ -41,7 +41,7 @@ public class EventModel {
 
     public void playSong(SongModel song)
     {
-        //TODO: complete playSong
+        //TODO: play song functionality integration may need to be removed -- check documentation and time for project
     }
 
     public void upvoteSong(SongModel song)

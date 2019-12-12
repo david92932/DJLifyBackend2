@@ -5,20 +5,21 @@ import java.util.Date;
 public class SongModel {
 
     String name, ID, APIURL, artist;
-    int upvotes;
-    Date duration;
+    int upvotes, duration;
+    boolean explicit;
 
-    SongModel()
+    public SongModel()
     {
         this.name = null;
         this.artist = null;
         this.ID = null;
         this.APIURL = null;
-        this.duration = null;
+        this.duration = 0;
         this.upvotes = 0;
+        this.explicit = false;
     }
 
-    SongModel(String name, String artist, String ID, String APIURL, Date duration)
+    public SongModel(String name, String artist, String ID, String APIURL, int duration, boolean explicit)
     {
         this.name = name;
         this.artist = artist;
@@ -26,26 +27,7 @@ public class SongModel {
         this.APIURL = APIURL;
         this.duration = duration;
         this.upvotes = 0;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setArtist(String artist) {
-        this.artist = artist;
-    }
-
-    public void setID(String ID) {
-        this.ID = ID;
-    }
-
-    public void setAPIURL(String APIURL) {
-        this.APIURL = APIURL;
-    }
-
-    public void setDuration(Date duration) {
-        this.duration = duration;
+        this.explicit = explicit;
     }
 
     public String getName() {
@@ -64,9 +46,11 @@ public class SongModel {
         return APIURL;
     }
 
-    public Date getDuration() {
+    public int getDuration() {
         return duration;
     }
+
+    public boolean isExplicit() { return explicit; }
 
     public void upvoteSong() {
         this.upvotes++;

@@ -1,5 +1,6 @@
 package com.djlify.demo.Controllers;
 
+import com.djlify.demo.Models.SongModel;
 import com.wrapper.spotify.SpotifyApi;
 import com.wrapper.spotify.exceptions.SpotifyWebApiException;
 import com.wrapper.spotify.model_objects.specification.ArtistSimplified;
@@ -42,14 +43,12 @@ public class SpotifyClient {
 
     private static  SearchTracksRequest searchTrackRequest;
 
-    public static ArrayList<Track[]> searchSong(String searchAttribute)
+    public static ArrayList<SongModel> searchSong(String searchAttribute) //searches for requested attribute, returns list of SongModel objects
     {
 
         searchTrackRequest = spotifyApi.searchTracks(searchAttribute).build();
 
-
-        //-----------------------
-        ArrayList<Track[]> list = new ArrayList<>();
+        ArrayList<SongModel> searchResults = new ArrayList<>();
 
         try {
 
@@ -63,10 +62,12 @@ public class SpotifyClient {
              for (int i = 0; i < 10 && i < items.length; i++)
              {
                  artists = items[i].getArtists();
-                 System.out.println("\nName: " + items[i].getName() + " -- Artist: " + artists[0].getName());
+                 System.out.println("\n\n\nName: " + items[i].getName() + "\nArtist: " + artists[0].getName() + "\nID: " + items[i].getId() + "\nURI: " + items[i].getUri() + "\nDuration: " + items[i].getDurationMs() + "\nExplicit: " + items[i].getIsExplicit());
+
+                 SongModel temp = new SongModel(items[i].getName(), artists[0].getName(), items[i].getId(), items[i].getUri(), items[i].getDurationMs(), items[i].getIsExplicit());
+                 searchResults.add(temp);
              }
 
-             list.add(items);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -74,26 +75,17 @@ public class SpotifyClient {
             e.printStackTrace();
         }
 
-        return list;
+        return searchResults;
     }
 
     public static void main(String[] args)
     {
 
-        clientCredential_Sync();
+        clientCredential_Sync(); //initializeAPI
 
-        ArrayList<Track[]> theList = new ArrayList<>();
-        Track track;
+        ArrayList<SongModel> theList = new ArrayList<>();
 
-        theList = searchSong("The Search For Everything");
-
-
-
-        for (int i = 0; i < theList.size(); i++) {
-            System.out.println("\n\n\n");
-            System.out.printf("SONG: " + theList.get(i).toString());
-        }
-
+        theList = searchSong("my dick");
 
     }
 

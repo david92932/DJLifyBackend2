@@ -1,8 +1,10 @@
 package com.djlify.demo.Models;
 
+import com.djlify.demo.Controllers.SpotifyClient;
+
 public class AttendeeModel {
 
-    //private SpotifyClient spotifyClient;
+    private SpotifyClient spotifyClient = new SpotifyClient();
     private EventModel event;
 
     private void requestSong(SongModel song)
