@@ -18,13 +18,13 @@ public class EventController {
 
     int countingEventID = 0;
     public static ArrayList<SongModel> masterList = new ArrayList<>();
-    public static ArrayList<EventModel> allEvents = new ArrayList<EventModel>();
+    public static ArrayList<EventModel> allEvents = new ArrayList<>();
     private SpotifyClient spotifyClient = new SpotifyClient();
 
     public static void createEvent()
     {
         EventModel eventModel;
-        eventModel = new EventModel("Wedding","00001e00001m", "DJLify.com/00001e00001m", "Erie PA", allDJs.get(1));
+        eventModel = new EventModel("Wedding","00001e00001m", "DJLify.com/00001e00001m", "Erie PA", DJController.allDJs.get(1));
         allEvents.add(eventModel);
     }
 
