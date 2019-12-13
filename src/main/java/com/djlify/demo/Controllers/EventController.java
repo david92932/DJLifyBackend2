@@ -100,6 +100,8 @@ public class EventController {
     @GetMapping(path = "Event/findSong")
     public ArrayList<SongModel> findSong(@RequestParam("query") String query){
 
+        //bitch
+
         spotifyClient.clientCredential_Sync();
 
         ArrayList<SongModel> results = new ArrayList<>();
