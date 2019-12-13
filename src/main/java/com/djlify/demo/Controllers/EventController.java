@@ -22,7 +22,7 @@ public class EventController {
     public void createEvent()
     {
         EventModel eventModel;
-        eventModel = new EventModel("Wedding","00001e00001m", "DJLify.com/00001e00001m", "Erie PA", allDJs.get(0));
+        eventModel = new EventModel("Wedding","00001e00001m", "DJLify.com/00001e00001m", "Erie PA", allDJs.get(1));
         allEvents.add(eventModel);
     }
 
