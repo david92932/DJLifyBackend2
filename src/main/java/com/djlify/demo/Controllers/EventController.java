@@ -19,7 +19,7 @@ public class EventController {
     public static ArrayList<EventModel> allEvents = new ArrayList<EventModel>();
     private SpotifyClient spotifyClient = new SpotifyClient();
 
-    public void createEvent()
+    public static void createEvent()
     {
         EventModel eventModel;
         eventModel = new EventModel("Wedding","00001e00001m", "DJLify.com/00001e00001m", "Erie PA", allDJs.get(1));

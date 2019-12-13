@@ -38,6 +38,7 @@ public class DJController {
     public String authDJ(@RequestParam("username") String username, @RequestParam("password") String password) {
 
         createDJ();
+        EventController.createEvent();
 
         String userID = null;
 
