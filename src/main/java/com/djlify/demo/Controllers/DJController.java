@@ -37,6 +37,8 @@ public class DJController {
     @GetMapping(path = "DJ/auth")
     public String authDJ(@RequestParam("username") String username, @RequestParam("password") String password) {
 
+        createDJ();
+
         String userID = null;
 
         for(DJModel dj: allDJs) {
