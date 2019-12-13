@@ -97,6 +97,19 @@ public class EventController {
         }
     }
 
+    @GetMapping(path = "Event/findSong")
+    public ArrayList<SongModel> findSong(@RequestParam("query") String query){
+
+        spotifyClient.clientCredential_Sync();
+
+        ArrayList<SongModel> results = new ArrayList<>();
+
+        results = spotifyClient.searchSong(query);
+
+        return results;
+
+    }
+
     @GetMapping(path = "Event/removeSong")
     public void removeSong(@RequestParam("eventID") String eventID, @RequestParam("songID") String songID) {
 
