@@ -20,7 +20,7 @@ public class EventModel {
 
     }
 
-    EventModel(String eventID, String eventURL, String hostingLocation, DJModel hostingDJ)
+    public EventModel(String eventID, String eventURL, String hostingLocation, DJModel hostingDJ)
     {
         this.eventID = eventID;
         this.eventURL = eventURL;

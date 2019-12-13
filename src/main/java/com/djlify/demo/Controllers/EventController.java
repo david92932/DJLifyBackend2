@@ -16,6 +16,13 @@ public class EventController {
     public static ArrayList<EventModel> allEvents = new ArrayList<EventModel>();
     private SpotifyClient spotifyClient = new SpotifyClient();
 
+    public void createEvent()
+    {
+        EventModel eventModel;
+        eventModel = new EventModel("00001e00001m", "DJLify.com/00001e00001m", "Erie PA", DJController.allDJs.get(0));
+        allEvents.add(eventModel);
+    }
+
     @GetMapping(path = "Event/getEvent")
     public EventModel getEvent(@RequestParam("ID") String ID) {
 
