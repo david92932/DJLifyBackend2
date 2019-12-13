@@ -99,8 +99,20 @@ public class EventController {
             }
         }
 
+        boolean added = false;
         for(EventModel event: allEvents) {
             if (event.getEventID().equals(eventID)) {
+
+                for (int i = 0; i < event.getSongList().size(); i++)
+                {
+                    if (event.getSongList().get(i).equals(song))
+                    {
+                        event.getSongList().get(i).upvoteSong();
+                        added = true;
+                    }
+                }
+
+                if (!added)
                 event.addSong(song);
 
             }
