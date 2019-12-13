@@ -6,7 +6,7 @@ public class DJModel {
 
     public String fname, lname, ID, pictureURL, biography;
 
-    public ArrayList<EventModel> events = new ArrayList<EventModel>();
+    public ArrayList<String> eventIDs = new ArrayList<>();
 
 
 
@@ -28,9 +28,6 @@ public class DJModel {
         this.biography = biography;
     }
 
-    public void addEvent(EventModel event) {
-        this.events.add(event);
-    }
 
     public void setFname(String fname) {
         this.fname = fname;
@@ -50,6 +47,10 @@ public class DJModel {
 
     public void setPictureURL(String pictureURL) {
         this.pictureURL = pictureURL;
+    }
+
+    public void addEventID(String eventID) {
+        this.eventIDs.add(eventID);
     }
 
     public String getFname() {
@@ -72,8 +73,7 @@ public class DJModel {
         return biography;
     }
 
-    public ArrayList<EventModel> getEvents() {
-        return events;
+    public ArrayList<String> getEventIDs() {
+        return eventIDs;
     }
-
 }
