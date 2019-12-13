@@ -35,7 +35,7 @@ public class DJController {
     }
 
     @GetMapping(path = "DJ/auth")
-    public DJModel authDJ(@RequestParam("username") String username, @RequestParam("password") String password) {
+    public String authDJ(@RequestParam("username") String username, @RequestParam("password") String password) {
 
         String userID = null;
 
@@ -46,7 +46,7 @@ public class DJController {
             }
         }
 
-        return this.getDJModel(userID);
+        return userID;
 
 
     }
