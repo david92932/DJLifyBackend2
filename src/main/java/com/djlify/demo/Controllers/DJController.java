@@ -26,9 +26,9 @@ public class DJController {
 
         String userID = null;
 
-        for(UserModel user: allDJLogins) {
-            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                userID = user.getID();
+        for(DJModel dj: allDJs) {
+            if (dj.getUsername().equals(username) && dj.getPassword().equals(password)) {
+                userID = dj.getID();
                 break;
             }
         }
