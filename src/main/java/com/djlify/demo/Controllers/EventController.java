@@ -74,7 +74,7 @@ public class EventController {
 
         for (DJModel djModel: allDJs)
         {
-            if (djModel.getID() == DJid)
+            if (djModel.getID().equals(DJid))
             {
                 dj = djModel;
                 break;
