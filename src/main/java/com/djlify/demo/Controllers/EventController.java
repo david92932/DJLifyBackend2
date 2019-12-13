@@ -6,6 +6,7 @@ import com.djlify.demo.Models.SongModel;
 import org.springframework.web.bind.annotation.*;
 
 import java.awt.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static com.djlify.demo.Controllers.DJController.allDJs;
@@ -16,6 +17,7 @@ import static com.djlify.demo.Controllers.DJController.allDJs;
 public class EventController {
 
     int countingEventID = 0;
+    public static ArrayList<SongModel> masterList = new ArrayList<>();
     public static ArrayList<EventModel> allEvents = new ArrayList<EventModel>();
     private SpotifyClient spotifyClient = new SpotifyClient();
 
@@ -87,11 +89,19 @@ public class EventController {
     @GetMapping(path = "Event/addSong")
     public void addSong(@RequestParam("eventID") String eventID, @RequestParam("songID") String songID) {
 
-        //SongModel song = this.spotifyClient.findSongByID(songID);
+        SongModel song = new SongModel();
+
+        for (SongModel songModel: masterList)
+        {
+            if (songModel.getID().equals(songID))
+            {
+                song = songModel;
+            }
+        }
 
         for(EventModel event: allEvents) {
             if (event.getEventID().equals(eventID)) {
-                //event.addSong(song);
+                event.addSong(song);
 
             }
         }
@@ -100,13 +110,14 @@ public class EventController {
     @GetMapping(path = "Event/findSong")
     public ArrayList<SongModel> findSong(@RequestParam("query") String query){
 
-        //bitch
 
         spotifyClient.clientCredential_Sync();
 
         ArrayList<SongModel> results = new ArrayList<>();
 
         results = spotifyClient.searchSong(query);
+
+        masterList = results;
 
         return results;
 
