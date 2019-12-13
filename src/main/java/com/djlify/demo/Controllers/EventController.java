@@ -22,7 +22,7 @@ public class EventController {
     public void createEvent()
     {
         EventModel eventModel;
-        eventModel = new EventModel("00001e00001m", "DJLify.com/00001e00001m", "Erie PA", allDJs.get(0));
+        eventModel = new EventModel("Wedding","00001e00001m", "DJLify.com/00001e00001m", "Erie PA", allDJs.get(0));
         allEvents.add(eventModel);
     }
 
@@ -68,7 +68,7 @@ public class EventController {
     @GetMapping(path = "Event/AddEvent")
     public void addEvent(@RequestParam("name") String name, @RequestParam("location") String location, @RequestParam("DJ") String DJid) {
 
-        DJModel dj;
+        DJModel dj = new DJModel();
 
         for (DJModel djModel: allDJs)
         {

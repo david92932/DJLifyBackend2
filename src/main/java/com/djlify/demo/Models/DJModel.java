@@ -11,7 +11,9 @@ public class DJModel {
 
 
 
-    DJModel(){
+    public DJModel(){
+        this.username = null;
+        this.password = null;
         this.fname = null;
         this.lname = null;
         this.ID = null;
@@ -20,8 +22,10 @@ public class DJModel {
 
     }
 
-    public DJModel(String fname, String lname, String ID, String pictureURL, String biography)
+    public DJModel(String username, String password, String fname, String lname, String ID, String pictureURL, String biography)
     {
+        this.username = username;
+        this.password = password;
         this.fname = fname;
         this.lname = lname;
         this.ID = ID;
