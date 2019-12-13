@@ -8,18 +8,21 @@ import org.springframework.web.bind.annotation.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+import static com.djlify.demo.Controllers.DJController.allDJs;
+
 @RestController
 @CrossOrigin(origins = {"http://localhost:63342", "http://localhost:63343"})
 
 public class EventController {
 
+    int countingEventID = 0;
     public static ArrayList<EventModel> allEvents = new ArrayList<EventModel>();
     private SpotifyClient spotifyClient = new SpotifyClient();
 
     public void createEvent()
     {
         EventModel eventModel;
-        eventModel = new EventModel("00001e00001m", "DJLify.com/00001e00001m", "Erie PA", DJController.allDJs.get(0));
+        eventModel = new EventModel("00001e00001m", "DJLify.com/00001e00001m", "Erie PA", allDJs.get(0));
         allEvents.add(eventModel);
     }
 
@@ -62,8 +65,22 @@ public class EventController {
 
     }
 
-    @RequestMapping(path = "Event/AddEvent")
-    public void addEvent(@RequestBody EventModel event) {
+    @GetMapping(path = "Event/AddEvent")
+    public void addEvent(@RequestParam("name") String name, @RequestParam("location") String location, @RequestParam("DJ") String DJid) {
+
+        DJModel dj;
+
+        for (DJModel djModel: allDJs)
+        {
+            if (djModel.getID() == DJid)
+            {
+                dj = djModel;
+                break;
+            }
+        }
+
+        EventModel event = new EventModel(name,countingEventID + "e" + countingEventID + "m", "DJLify.com/" + countingEventID + "e" + countingEventID + "m", location, dj);
+
         allEvents.add(event);
     }
 

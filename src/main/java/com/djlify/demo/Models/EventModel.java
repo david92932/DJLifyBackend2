@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class EventModel {
 
-    public String eventID, hostingLocation, eventURL;
+    public String eventID, hostingLocation, eventURL, eventName;
     DJModel hostingDJ;
     ArrayList<SongModel> songList = new ArrayList<SongModel>();
     SpotifyClient spotifyClient;
@@ -20,8 +20,9 @@ public class EventModel {
 
     }
 
-    public EventModel(String eventID, String eventURL, String hostingLocation, DJModel hostingDJ)
+    public EventModel(String eventName, String eventID, String eventURL, String hostingLocation, DJModel hostingDJ)
     {
+        this.eventName = eventName;
         this.eventID = eventID;
         this.eventURL = eventURL;
         this.hostingDJ = hostingDJ;
@@ -51,6 +52,10 @@ public class EventModel {
 
     public void setEventID(String eventID) {
         this.eventID = eventID;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
     }
 
     public void setEventURL(String eventURL) {
@@ -83,5 +88,9 @@ public class EventModel {
 
     public String getHostingLocation() {
         return hostingLocation;
+    }
+
+    public String getEventName() {
+        return eventName;
     }
 }
