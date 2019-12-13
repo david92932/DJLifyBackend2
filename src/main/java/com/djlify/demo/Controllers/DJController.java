@@ -14,6 +14,19 @@ public class DJController {
     public static ArrayList<DJModel> allDJs = new ArrayList<>();
     public static ArrayList<UserModel> allDJLogins = new ArrayList<>();
 
+    public void createDJ()
+    {
+        DJModel djModel;
+        djModel = new DJModel("Max", "Hendi", "d00001j00001", "http://google.com", "Best dj on southside of Erie");
+        allDJs.add(djModel);
+        djModel = new DJModel("Arielle", "Fonso", "d00001j00002", "http://google.com", "Best dj on northside of Erie");
+        allDJs.add(djModel);
+        djModel = new DJModel("Tyler", "Gillty", "d00001j00003", "http://google.com", "Best dj on Lake Erie");
+        allDJs.add(djModel);
+
+    }
+
+
     @GetMapping(path = "DJ/getDJ")
     public DJModel getDJ(@RequestParam("ID") String ID) {
 

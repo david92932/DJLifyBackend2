@@ -20,7 +20,7 @@ public class DJModel {
 
     }
 
-    DJModel(String fname, String lname, String ID, String pictureURL, String biography)
+    public DJModel(String fname, String lname, String ID, String pictureURL, String biography)
     {
         this.fname = fname;
         this.lname = lname;
